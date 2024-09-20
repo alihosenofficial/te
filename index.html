@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analyzer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1200px;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+        .container h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .container textarea {
+            width: 98%;
+            height: 550px;
+            background-color: #3e3e3e;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
+        .container p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .container input[type="password"] {
+            width: 98%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            font-size: 16px;
+            background-color: #3e3e3e;
+            color: #fff;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .stats div {
+            text-align: center;
+            background-color: #4e4e4e;
+            padding: 10px;
+            border-radius: 5px;
+            width: 48%;
+        }
+        @media (max-width: 600px) {
+            .stats div {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        .n {
+            margin: 30px 5% 5% 5%;
+            color: #3bff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Analyzer</h1>
+        <input type="password" id="password" placeholder="Enter Password to Access">
+        <textarea id="textBox" disabled placeholder="Start typing here..." oninput="analyzeText()"></textarea>
+        <div class="stats">
+            <div>
+                <p>Words: <span id="wordCount">0</span></p>
+                <p>Lines: <span id="lineCount">0</span></p>
+            </div>
+            <div>
+                <p>Characters (incl. spaces): <span id="charCount">0</span></p>
+                <p>Punctuation: <span id="punctCount">0</span></p>
+            </div>
+        </div>
+        <div class="n">
+            <p>Bing AI: <b>480</b> Characters</p>
+            <p>ChatGPT: <b>4096</b> Characters</p>
+            <p>X: <b>250</b> Characters</p>
+            <p>Meta Keyword: <b>60</b> Characters</p>
+            <p>Meta Description: <b>160</b> Characters</p>
+            <p>Web Title: <b>60</b> Characters</p>
+        </div>
+        <h1 style="margin: 30px 0 0 0; font-size: 20px; color: #fff; text-shadow: 0 0 30px #3bff00;">Developer: Ali Hosen</h1>
+    </div>
+    <script>
+        const textBox = document.getElementById('textBox');
+        const passwordInput = document.getElementById('password');
+        const wordCount = document.getElementById('wordCount');
+        const lineCount = document.getElementById('lineCount');
+        const charCount = document.getElementById('charCount');
+        const punctCount = document.getElementById('punctCount');
+
+        passwordInput.addEventListener('input', function() {
+            textBox.disabled = passwordInput.value !== '1470';
+        });
+
+        function analyzeText() {
+            const text = textBox.value;
+            wordCount.textContent = (text.match(/\b\w+\b/g) || []).length;
+            lineCount.textContent = text.split('\n').length;
+            charCount.textContent = text.length;
+            punctCount.textContent = (text.match(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g) || []).length;
+        }
+    </script>
+</body>
+</html>
